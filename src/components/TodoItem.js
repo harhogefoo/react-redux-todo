@@ -10,13 +10,12 @@ export default class TodoItem extends React.Component {
   }
 
   onCheckBoxChange() {
-    this.setState({
-      todo: {
-        ...this.state.todo,
-        isCheck: !this.state.todo.isCheck,
-      }
-    })
-    this.props.onClick(this.state.todo)
+    const todo = {
+      ...this.state.todo,
+      isCheck: !this.state.todo.isCheck,
+    }
+    this.setState({ todo })
+    this.props.onClick(todo)
   }
 
   render() {
