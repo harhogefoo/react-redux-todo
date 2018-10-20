@@ -1,11 +1,11 @@
 import { createStore as reduxCreateStore, applyMiddleware, combineReducers } from 'redux'
 import logger from 'redux-logger'
-import { todoReducer } from './reducers/Todo'
+import { todoListReducer } from './reducers/TodoList'
 
 export default function createStore() {
   const store = reduxCreateStore(
     combineReducers({
-      todo: todoReducer,
+      todo: todoListReducer,
     }),
     applyMiddleware(
       logger,
