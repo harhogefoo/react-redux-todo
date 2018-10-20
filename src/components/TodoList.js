@@ -18,6 +18,16 @@ export default class TodoList extends React.Component {
     })
   }
 
+  addTodo() {
+    this.props.addTodo(this.state.todo)
+    this.setState({
+      todo: {
+        ...this.state.todo,
+        content: '',
+      }
+    })
+  }
+
   render() {
     const list = this.props.todo.todoList.map((todo, index) => {
       return (
@@ -32,8 +42,8 @@ export default class TodoList extends React.Component {
     })
     return (
       <div>
-        <input type="text" onChange={elm => this.onChange(elm)} />
-        <button onClick={() => this.props.addTodo(this.state.todo)}>追加</button>
+        <input type="text" onChange={elm => this.onChange(elm)} value={this.state.todo.content} />
+        <button onClick={() => this.addTodo()}>追加</button>
         <ul>
           {list}
         </ul>
