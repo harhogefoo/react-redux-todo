@@ -28,25 +28,47 @@ export default class TodoList extends React.Component {
     })
   }
 
+  buildTodo(todo, index) {
+    return (
+      <TodoItem
+        key={index}
+        index={index}
+        content={todo.content}
+        isCheck={todo.isCheck}
+        onClick={this.props.checkTodo}
+      />
+    )
+  }
+
   render() {
-    const list = this.props.todo.todoList.map((todo, index) => {
-      return (
-        <TodoItem
-          key={index}
-          index={index}
-          content={todo.content}
-          isCheck={todo.isCheck}
-          onClick={this.props.checkTodo}
-        />
-      )
+    const unCheckedlist = []
+    const checkedList = []
+
+    this.props.todo.todoList.forEach((todo, index) => {
+      const t = this.buildTodo(todo, index)
+      if (todo.isCheck) {
+        checkedList.push(t)
+      } else {
+        unCheckedlist.push(t)
+      }
     })
+
     return (
       <div>
         <input type="text" onChange={elm => this.onChange(elm)} value={this.state.todo.content} />
-        <button onClick={() => this.addTodo()}>追加</button>
-        <ul>
-          {list}
-        </ul>
+        <button onClick={() => this.addTodo()}>ADD</button>
+        <section>
+          <h1>Incomplete</h1>
+          <ul>
+            {unCheckedlist}
+          </ul>
+        </section>
+        <section>
+          <h1>complete</h1>
+          <ul>
+            {checkedList}
+          </ul>
+        </section>
       </div>
     )
   }
