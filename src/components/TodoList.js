@@ -9,14 +9,11 @@ export default class TodoList extends React.Component {
     }
   }
 
-  onChange(elm) {
-    this.setState({
-      content: elm.target.value
-    })
-  }
-
   addTodo() {
     const { content } = this.state
+    if (!content.trim()) {
+      return
+    }
     this.props.addTodo(content)
     this.setState({
       content: ''
@@ -51,8 +48,11 @@ export default class TodoList extends React.Component {
 
     const { content } = this.state
     return (
+
       <div>
-        <input type="text" onChange={elm => this.onChange(elm)} value={content} />
+        <input type="text"
+          onChange={elm => this.setState({ content: elm.target.value })}
+          value={content} />
         <button onClick={() => this.addTodo()}>ADD</button>
         <section>
           <h1>Incomplete</h1>
