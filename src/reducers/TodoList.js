@@ -1,3 +1,4 @@
+import { getUniqueStr } from '../util'
 
 const initialState = {
   todoList: []
@@ -5,9 +6,14 @@ const initialState = {
 
 export const todoListReducer = (state = initialState, action) => {
   if (action.type === 'ADD_TODO') {
-    const addTodo = action.payload.todo
+    const { content } = action.payload.todo
     const newState = Object.assign({}, state)
-    newState.todoList.push(addTodo)
+    const todo = {
+      index: getUniqueStr(),
+      isCheck: false,
+      content,
+    }
+    newState.todoList.push(todo)
     return newState
   } else if (action.type === 'CHECK_TODO') {
     const { index } = action.payload.todo

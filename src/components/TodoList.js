@@ -1,38 +1,25 @@
 import React from 'react'
 import TodoItem from './TodoItem';
-import { getUniqueStr } from '../util'
 
 export default class TodoList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      todo: {
-        content: '',
-        isCheck: false
-      }
+      content: ''
     }
   }
 
   onChange(elm) {
     this.setState({
-      todo: {
-        ...this.state.todo,
-        content: elm.target.value
-      }
+      content: elm.target.value
     })
   }
 
   addTodo() {
-    const todo = {
-      ...this.state.todo,
-      index: getUniqueStr(),
-    }
-    this.props.addTodo(todo)
+    const { content } = this.state
+    this.props.addTodo({ content })
     this.setState({
-      todo: {
-        ...this.state.todo,
-        content: '',
-      }
+      content: ''
     })
   }
 
@@ -62,9 +49,10 @@ export default class TodoList extends React.Component {
       }
     })
 
+    const { content } = this.state
     return (
       <div>
-        <input type="text" onChange={elm => this.onChange(elm)} value={this.state.todo.content} />
+        <input type="text" onChange={elm => this.onChange(elm)} value={content} />
         <button onClick={() => this.addTodo()}>ADD</button>
         <section>
           <h1>Incomplete</h1>
