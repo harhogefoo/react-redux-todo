@@ -11,7 +11,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addTodo: (todo) => dispatch(actions.addTodo(todo)),
-    checkTodo: (todo) => dispatch(actions.checkTodo(todo))
+    checkTodo: (todo) => dispatch(actions.checkTodo(todo)),
+    removeTodo: (todo) => dispatch(actions.removeTodo(todo))
   }
 }
 

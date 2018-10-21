@@ -18,15 +18,20 @@ export default class TodoItem extends React.Component {
     this.props.onClick(todo)
   }
 
+  onRemoveButtonClicked() {
+    console.log(this.props)
+    this.props.onRemove(this.state.todo)
+  }
+
   render() {
     return (
       <li key={this.state.todo.index}>
         <input
           onChange={() => this.onCheckBoxChange()}
           checked={this.state.todo.isCheck}
-          type="checkbox"
-        ></input>
+          type="checkbox" />
         {this.state.todo.content}
+        {this.state.todo.isCheck && <button onClick={() => this.onRemoveButtonClicked()}>REMOVE</button>}
       </li>
     )
   }
