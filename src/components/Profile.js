@@ -4,10 +4,8 @@ import ProfileContent from './ProfileContent'
 export default class Profile extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       isOpen: this.props.profile.isOpen,
-      isNameOpen: false,
     }
   }
 
@@ -17,7 +15,7 @@ export default class Profile extends React.Component {
       isOpen: !this.state.isOpen
     }
     this.setState(profile)
-    // this.props.toggleProfile(profile)
+    this.props.toggleProfile(profile)
   }
 
   render() {

@@ -28,8 +28,18 @@ export default class ProfileContent extends React.Component {
         <section>
           <h1>設定</h1>
           <p>設定画面です</p>
-          <ProfileInput label='名前' value={this.state.profile.name} editProfile={this.props.editProfile} />
-          <ProfileInput label='住所' value={this.state.profile.address} editProfile={this.props.editProfile} />
+          <ProfileInput
+            uuid='isNameOpen'
+            isEdit={this.state.isNameOpen}
+            label='名前'
+            value={this.state.profile.name}
+            editProfile={this.props.editProfile} />
+          <ProfileInput
+            uuid='isAddressOpen'
+            isEdit={this.state.isAddressOpen}
+            label='住所'
+            value={this.state.profile.address}
+            editProfile={this.props.editProfile} />
         </section>
       </div>
     )

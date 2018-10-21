@@ -13,9 +13,7 @@ export const profileReducer = (state = initialState, action) => {
   } else if (action.type === 'EDIT_PROFILE') {
     const profile = action.payload.profile
     const newState = Object.assign({}, state)
-    const newProfile = Object.assign(newState.profile, {
-      profile
-    })
+    const newProfile = Object.assign(newState.profile, profile)
     newState.profile = newProfile
     return newState
   } else {

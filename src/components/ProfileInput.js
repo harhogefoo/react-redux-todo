@@ -3,9 +3,8 @@ import React from 'react'
 export default class ProfileInput extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
-      isEdit: this.props.isNameOpen,
+      isEdit: this.props.isEdit || false,
       value: this.props.value
     }
   }
@@ -19,8 +18,12 @@ export default class ProfileInput extends React.Component {
 
   onEdit() {
     console.log(this.props)
+    this.setState({
+      ...this.state,
+      isEdit: !this.state.isEdit
+    })
     this.props.editProfile({
-      isNameOpen: true,
+      [this.props.uuid]: !this.state.isEdit,
     })
   }
 
