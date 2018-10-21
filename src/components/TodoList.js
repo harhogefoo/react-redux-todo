@@ -40,7 +40,7 @@ export default class TodoList extends React.Component {
     const unCheckedlist = []
     const checkedList = []
 
-    this.props.todo.todoList.forEach((todo) => {
+    this.props.todo.forEach((todo) => {
       const t = this.buildTodo(todo)
       if (todo.isCheck) {
         checkedList.push(t)
