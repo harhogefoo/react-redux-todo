@@ -3,12 +3,12 @@ import React from 'react'
 export default class TodoItem extends React.Component {
   onCheckBoxChange() {
     const { index } = this.props
-    this.props.onClick({ index })
+    this.props.onClick(index)
   }
 
   onRemoveButtonClicked() {
     const { index } = this.props
-    this.props.onRemove({ index })
+    this.props.onRemove(index)
   }
 
   render() {

@@ -5,34 +5,35 @@ const initialState = {
 }
 
 export const todoListReducer = (state = initialState, action) => {
-  if (action.type === 'ADD_TODO') {
-    const { content } = action.payload.todo
-    const newState = Object.assign({}, state)
-    const todo = {
-      index: getUniqueStr(),
-      isCheck: false,
-      content,
-    }
-    newState.todoList.push(todo)
-    return newState
-  } else if (action.type === 'CHECK_TODO') {
-    const { index } = action.payload.todo
-    const newState = Object.assign({}, state)
-    const newTodoList = newState.todoList.map(todo => {
-      if (todo.index === index) {
-        todo.isCheck = !todo.isCheck
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {
+        ...state,
+        todoList: [
+          ...state.todoList,
+          { index: getUniqueStr(), isCheck: false, content: action.content }
+        ]
       }
-      return todo
-    })
-    newState.todoList = newTodoList
-    return newState
-  } else if (action.type === 'REMOVE_TODO') {
-    const { index } = action.payload.todo
-    const newState = Object.assign({}, state)
-    const newTodoList = newState.todoList.filter((todo) => todo.index !== index)
-    newState.todoList = newTodoList
-    return newState
-  } else {
-    return state
+    case 'CHECK_TODO':
+      return {
+        ...state,
+        todoList: [
+          ...state.todoList.map(todo => {
+            if (todo.index === action.index) {
+              todo.isCheck = !todo.isCheck
+            }
+            return todo
+          }),
+        ]
+      }
+    case 'REMOVE_TODO':
+      return {
+        ...state,
+        todoList: [
+          ...state.todoList.filter(todo => todo.index !== action.index)
+        ]
+      }
+    default:
+      return state
   }
 }

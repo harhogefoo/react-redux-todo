@@ -17,7 +17,7 @@ export default class TodoList extends React.Component {
 
   addTodo() {
     const { content } = this.state
-    this.props.addTodo({ content })
+    this.props.addTodo(content)
     this.setState({
       content: ''
     })
