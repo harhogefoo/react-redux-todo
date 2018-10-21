@@ -10,14 +10,13 @@ export const todoListReducer = (state = initialState, action) => {
     newState.todoList.push(addTodo)
     return newState
   } else if (action.type === 'CHECK_TODO') {
-    const checkTodo = action.payload.todo
+    const { index } = action.payload.todo
     const newState = Object.assign({}, state)
     const newTodoList = newState.todoList.map(todo => {
-      if (todo.index === checkTodo.index) {
-        return checkTodo
-      } else {
-        return todo
+      if (todo.index === index) {
+        todo.isCheck = !todo.isCheck
       }
+      return todo
     })
     newState.todoList = newTodoList
     return newState

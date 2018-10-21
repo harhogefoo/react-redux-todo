@@ -2,19 +2,17 @@ import React from 'react'
 
 export default class TodoItem extends React.Component {
   onCheckBoxChange() {
-    const { index, content, isCheck } = this.props;
-    this.props.onClick({
-      index, content, isCheck: !isCheck
-    }) // 本当はindex だけ渡して isCheck を逆転させるロジックはreducer で書くべき
+    const { index } = this.props
+    this.props.onClick({ index })
   }
 
   onRemoveButtonClicked() {
-    const { index } = this.props;
+    const { index } = this.props
     this.props.onRemove({ index })
   }
 
   render() {
-    const { index, content, isCheck } = this.props;
+    const { index, content, isCheck } = this.props
     return (
       <li key={index}>
         <input
