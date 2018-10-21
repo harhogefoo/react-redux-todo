@@ -1,39 +1,30 @@
 import React from 'react'
 
 export default class TodoItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      todo: {
-        index: this.props.index,
-        content: this.props.content,
-        isCheck: this.props.isCheck,
-      }
-    }
-  }
-
   onCheckBoxChange() {
-    const todo = {
-      ...this.state.todo,
-      isCheck: !this.state.todo.isCheck,
-    }
-    this.setState({ todo })
-    this.props.onClick(todo)
+    const { index, content, isCheck } = this.props;
+    this.props.onClick({
+      index, content, isCheck: !isCheck
+    }) // 本当はindex だけ渡して isCheck を逆転させるロジックはreducer で書くべき
   }
 
   onRemoveButtonClicked() {
-    this.props.onRemove(this.state.todo)
+    const { index, content, isCheck } = this.props;
+    this.props.onRemove({
+      index: index, content: content, isCheck: isCheck
+    }) // 本当はindex だけ渡せば良い
   }
 
   render() {
+    const { index, content, isCheck } = this.props;
     return (
-      <li key={this.state.todo.index}>
+      <li key={index}>
         <input
           onChange={() => this.onCheckBoxChange()}
-          checked={this.state.todo.isCheck}
+          checked={isCheck}
           type="checkbox" />
-        {this.state.todo.content}
-        {this.state.todo.isCheck && <button onClick={() => this.onRemoveButtonClicked()}>REMOVE</button>}
+        {content}
+        {isCheck && <button onClick={() => this.onRemoveButtonClicked()}>REMOVE</button>}
       </li>
     )
   }
