@@ -1,11 +1,14 @@
 import React from 'react'
 
 export default class TodoItem extends React.Component {
-  state = {
-    todo: {
-      index: this.props.index,
-      content: this.props.content,
-      isCheck: this.props.isCheck,
+  constructor(props) {
+    super(props)
+    this.state = {
+      todo: {
+        index: this.props.index,
+        content: this.props.content,
+        isCheck: this.props.isCheck,
+      }
     }
   }
 

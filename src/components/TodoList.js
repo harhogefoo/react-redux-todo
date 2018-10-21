@@ -3,10 +3,13 @@ import TodoItem from './TodoItem';
 import { getUniqueStr } from '../util'
 
 export default class TodoList extends React.Component {
-  state = {
-    todo: {
-      content: '',
-      isCheck: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      todo: {
+        content: '',
+        isCheck: false
+      }
     }
   }
 
