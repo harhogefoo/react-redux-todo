@@ -1,5 +1,6 @@
 import React from 'react'
 import TodoItem from './TodoItem';
+import { getUniqueStr } from '../util'
 
 export default class TodoList extends React.Component {
   state = {
@@ -19,7 +20,11 @@ export default class TodoList extends React.Component {
   }
 
   addTodo() {
-    this.props.addTodo(this.state.todo)
+    const todo = {
+      ...this.state.todo,
+      index: getUniqueStr(),
+    }
+    this.props.addTodo(todo)
     this.setState({
       todo: {
         ...this.state.todo,
@@ -28,14 +33,15 @@ export default class TodoList extends React.Component {
     })
   }
 
-  buildTodo(todo, index) {
+  buildTodo(todo) {
     return (
       <TodoItem
-        key={index}
-        index={index}
+        key={todo.index}
+        index={todo.index}
         content={todo.content}
         isCheck={todo.isCheck}
         onClick={this.props.checkTodo}
+        onRemove={this.props.removeTodo}
       />
     )
   }
@@ -44,8 +50,8 @@ export default class TodoList extends React.Component {
     const unCheckedlist = []
     const checkedList = []
 
-    this.props.todo.todoList.forEach((todo, index) => {
-      const t = this.buildTodo(todo, index)
+    this.props.todo.todoList.forEach((todo) => {
+      const t = this.buildTodo(todo)
       if (todo.isCheck) {
         checkedList.push(t)
       } else {

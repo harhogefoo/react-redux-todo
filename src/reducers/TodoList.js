@@ -12,12 +12,20 @@ export const todoListReducer = (state = initialState, action) => {
   } else if (action.type === 'CHECK_TODO') {
     const checkTodo = action.payload.todo
     const newState = Object.assign({}, state)
-    newState.todoList[checkTodo.index] = checkTodo
+    const newTodoList = newState.todoList.map(todo => {
+      if (todo.index === checkTodo.index) {
+        return checkTodo
+      } else {
+        return todo
+      }
+    })
+    newState.todoList = newTodoList
     return newState
   } else if (action.type === 'REMOVE_TODO') {
     const removeTodo = action.payload.todo
     const newState = Object.assign({}, state)
-    newState.todoList.splice(removeTodo.index, 1)
+    const newTodoList = newState.todoList.filter((todo) => todo.index !== removeTodo.index)
+    newState.todoList = newTodoList
     return newState
   } else {
     return state

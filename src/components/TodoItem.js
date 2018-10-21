@@ -19,7 +19,6 @@ export default class TodoItem extends React.Component {
   }
 
   onRemoveButtonClicked() {
-    console.log(this.props)
     this.props.onRemove(this.state.todo)
   }
 
