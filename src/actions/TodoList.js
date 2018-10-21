@@ -1,20 +1,20 @@
-export const addTodo = (todo) => {
+export const addTodo = content => {
   return {
     type: 'ADD_TODO',
-    payload: { todo: todo }
+    content
   }
 }
 
-export const removeTodo = (todo) => {
+export const removeTodo = index => {
   return {
     type: 'REMOVE_TODO',
-    payload: { todo: todo }
+    index
   }
 }
 
-export const checkTodo = (todo) => {
+export const checkTodo = index => {
   return {
     type: 'CHECK_TODO',
-    payload: { todo: todo }
+    index
   }
 }

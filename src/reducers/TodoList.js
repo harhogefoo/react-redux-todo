@@ -1,33 +1,25 @@
+import { getUniqueStr } from '../util'
 
-const initialState = {
-  todoList: []
-}
-
-export const todoListReducer = (state = initialState, action) => {
-  if (action.type === 'ADD_TODO') {
-    const addTodo = action.payload.todo
-    const newState = Object.assign({}, state)
-    newState.todoList.push(addTodo)
-    return newState
-  } else if (action.type === 'CHECK_TODO') {
-    const checkTodo = action.payload.todo
-    const newState = Object.assign({}, state)
-    const newTodoList = newState.todoList.map(todo => {
-      if (todo.index === checkTodo.index) {
-        return checkTodo
-      } else {
-        return todo
-      }
-    })
-    newState.todoList = newTodoList
-    return newState
-  } else if (action.type === 'REMOVE_TODO') {
-    const removeTodo = action.payload.todo
-    const newState = Object.assign({}, state)
-    const newTodoList = newState.todoList.filter((todo) => todo.index !== removeTodo.index)
-    newState.todoList = newTodoList
-    return newState
-  } else {
-    return state
+export const todoListReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          index: getUniqueStr(),
+          isCheck: false,
+          content: action.content
+        }
+      ]
+    case 'CHECK_TODO':
+      return state.map(todo =>
+        (todo.index === action.index)
+          ? { ...todo, isCheck: !todo.isCheck }
+          : todo
+      )
+    case 'REMOVE_TODO':
+      return state.filter(todo => todo.index !== action.index)
+    default:
+      return state
   }
 }
