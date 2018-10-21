@@ -4,7 +4,6 @@ import ProfileInput from './ProfileInput'
 export default class ProfileContent extends React.Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
     this.state = {
       profile: {
         isOepn: this.props.isOpen,
