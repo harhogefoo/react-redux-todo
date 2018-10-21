@@ -22,9 +22,9 @@ export const todoListReducer = (state = initialState, action) => {
     newState.todoList = newTodoList
     return newState
   } else if (action.type === 'REMOVE_TODO') {
-    const removeTodo = action.payload.todo
+    const { index } = action.payload.todo
     const newState = Object.assign({}, state)
-    const newTodoList = newState.todoList.filter((todo) => todo.index !== removeTodo.index)
+    const newTodoList = newState.todoList.filter((todo) => todo.index !== index)
     newState.todoList = newTodoList
     return newState
   } else {

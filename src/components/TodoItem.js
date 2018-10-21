@@ -9,10 +9,8 @@ export default class TodoItem extends React.Component {
   }
 
   onRemoveButtonClicked() {
-    const { index, content, isCheck } = this.props;
-    this.props.onRemove({
-      index: index, content: content, isCheck: isCheck
-    }) // 本当はindex だけ渡せば良い
+    const { index } = this.props;
+    this.props.onRemove({ index })
   }
 
   render() {
