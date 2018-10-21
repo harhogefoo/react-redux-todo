@@ -18,12 +18,11 @@ export const todoListReducer = (state = initialState, action) => {
       return {
         ...state,
         todoList: [
-          ...state.todoList.map(todo => {
-            if (todo.index === action.index) {
-              todo.isCheck = !todo.isCheck
-            }
-            return todo
-          }),
+          ...state.todoList.map(todo =>
+            (todo.index === action.index)
+              ? { ...todo, isCheck: !todo.isCheck }
+              : todo
+          ),
         ]
       }
     case 'REMOVE_TODO':
