@@ -17,7 +17,6 @@ export default class ProfileInput extends React.Component {
   }
 
   onEdit() {
-    console.log(this.props)
     this.setState({
       ...this.state,
       isEdit: !this.state.isEdit
